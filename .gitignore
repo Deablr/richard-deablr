@@ -1,0 +1,17 @@
+# Server data directory (contains world, configs, plugins, logs)
+data/
+
+# World zip - too large for git
+world.zip
+*.zip
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
