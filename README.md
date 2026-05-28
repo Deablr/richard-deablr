@@ -5,6 +5,7 @@ A small creative Minecraft server running Paper 26.1.2, deployed via Dokploy.
 ## What's Inside
 
 - **Docker Compose** configuration for `itzg/minecraft-server`
+- **Dockerfile** with all settings baked in (for platforms that require it)
 - **Paper 26.1.2** with Minecraft year-based versioning (26.x)
 - **WorldEdit** pre-installed
 - **Flat world**, no mobs, no nether — optimized for creative building
@@ -96,7 +97,8 @@ Add plugin direct-download URLs to the `PLUGINS` environment variable (pipe-sepa
 
 ```
 .
-├── compose.yml           # Docker Compose configuration
+├── compose.yml           # Docker Compose configuration (recommended for Dokploy)
+├── Dockerfile            # Standalone Docker image with all settings baked in
 ├── server-icon.png       # Server icon (mounted into container)
 ├── README.md             # This file
 └── world.zip             # World data (not in Git, uploaded manually)
@@ -115,6 +117,12 @@ Add plugin direct-download URLs to the `PLUGINS` environment variable (pipe-sepa
 
 ### Port already in use
 - Change the host port mapping in `compose.yml` if 25565 is taken
+
+## Dockerfile
+
+A `Dockerfile` is included that bakes in all the same environment variables and the server icon. This is useful if your deployment platform requires a Dockerfile instead of Compose.
+
+**Prefer `compose.yml`** for Dokploy deployments — it handles the host volume mount correctly. The Dockerfile declares `/data` as a `VOLUME`, but the actual host path binding still needs to be configured by your orchestrator.
 
 ## Notes
 
